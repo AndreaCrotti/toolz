@@ -1,5 +1,5 @@
 from toolz import curry, unique, first, take
-from toolz.sandbox.core import EqualityHashKey, unzip
+from toolz.sandbox.core import EqualityHashKey, unzip, merge_recursive
 from itertools import count, repeat
 from toolz.compatibility import map, zip
 
@@ -101,3 +101,12 @@ def test_unzip():
 
     # Sensibly handles empty input
     assert list(unzip(zip([]))) == []
+
+
+def test_merge_recursive():
+    inp = [
+        {1: {2: 3}},
+        {1: {3: 4}},
+    ]
+    out = {1: {2: 3, 3: 4}}
+    assert merge_recursive(*inp) == out

@@ -1,4 +1,5 @@
 from toolz.itertoolz import getter, cons, pluck
+from toolz.dicttoolz import merge, merge_with
 from itertools import tee, starmap
 
 
@@ -130,3 +131,10 @@ def unzip(seq):
     seqs = tee(cons(first, seq), niters)
 
     return tuple(starmap(pluck, enumerate(seqs)))
+
+
+def merge_recursive(*dicts):
+    """Given a list of dictionaries merge them recursively
+    """
+    # tmp = dicts[0].copy()
+    return merge_with(merge, *dicts)
